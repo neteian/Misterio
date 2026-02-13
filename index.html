@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Carta Sorpresa</title>
+
+<style>
+body{
+    background:#fde2e4;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    flex-direction:column;
+    font-family:Arial, sans-serif;
+    text-align:center;
+}
+
+/* BOTONES */
+button{
+    padding:12px 20px;
+    font-size:16px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    background:#ff4d6d;
+    color:white;
+    transition:0.3s;
+    margin-top:15px;
+}
+
+button:hover{
+    background:#e5383b;
+}
+
+/* CARTAS */
+.card{
+    width:320px;
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+    display:none;
+    animation:fadeIn 1s ease;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+/* IMAGEN */
+.cat-img{
+    width:100px;
+    margin-top:15px;
+    border-radius:15px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- BOTÓN INICIAL -->
+<button id="openBtn" onclick="showFirstCard()">Haz click para abrirme</button>
+
+<!-- PRIMERA CARTA -->
+<div class="card" id="firstCard">
+    <p>
+    Gracias por acompañarme y soportarme xd,<br>
+    soy raro y a veces extraño... pero gracias 💛<br><br>
+    Así que como recompensa te doy un ticket.<br>
+    Úsalo sabiamente 👍
+    </p>
+
+    <button onclick="showReward()">RECLAMAR RECOMPENSA</button>
+</div>
+
+<!-- SEGUNDA CARTA (RECOMPENSA) -->
+<div class="card" id="rewardCard">
+    <p><b>Feliz día de la amistad 💖</b><br>
+    Has ganado un cupón para reclamar manguitos o uvas verdes 🍇🥭<br>
+    <i>Fecha de expiración ilimitada-Reclámelo cuando guste</i></p>
+
+    <img src="gatito.png" alt="gatito negro" class="cat-img">
+</div>
+
+<!-- MÚSICA -->
+<audio id="bgMusic" src="musica.mp3" loop></audio>
+
+<script>
+
+function showFirstCard(){
+    document.getElementById("openBtn").style.display = "none";
+    document.getElementById("firstCard").style.display = "block";
+}
+
+function showReward(){
+    let first = document.getElementById("firstCard");
+    let reward = document.getElementById("rewardCard");
+    let music = document.getElementById("bgMusic");
+
+    first.style.display = "none";
+    reward.style.display = "block";
+
+    // 🎵 Volumen suave
+    music.volume = 0;
+    music.play();
+
+    let volume = 0;
+    let fadeIn = setInterval(() => {
+        if (volume < 0.5){
+            volume += 0.05;
+            music.volume = volume;
+        } else {
+            clearInterval(fadeIn);
+        }
+    }, 200);
+}
+
+</script>
+
+</body>
+</html>
